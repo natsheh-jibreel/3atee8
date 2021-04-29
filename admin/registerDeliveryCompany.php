@@ -1,26 +1,12 @@
-<?php
-    include 'header.php';
-    if(!isset($_SESSION['register_error'])){
-        $_SESSION['register_error'] = '';
+<?php 
+    require('../db/db_connect.php');
+
+    session_start();
+    if(!isset($_SESSION['delivery_company_register_error'])){
+        $_SESSION['delivery_company_register_error'] = '';
     }
-    if(!isset($_SESSION['first_name'])){
-        $_SESSION['first_name'] = '';
-    }
-    if(!isset($_SESSION['last_name'])){
-        $_SESSION['last_name'] = '';
-    }
-    if(!isset($_SESSION['address'])){
-        $_SESSION['address'] = '';
-    }
-    if(!isset($_SESSION['phone'])){
-        $_SESSION['phone'] = '';
-    }
-    if(!isset($_SESSION['city'])){
-        $_SESSION['city'] = '';
-    }
-    if(!isset($_SESSION['email'])){
-        $_SESSION['email'] = '';
-    }
+    include 'header.html';
+
 ?>
 <!-- Breadcrumb Section Begin -->
 <div class="breacrumb-section">
@@ -29,7 +15,7 @@
             <div class="col-lg-12">
                 <div class="breadcrumb-text">
                     <a href="#"><i class="fa fa-home"></i> الصفحة الرئيسية</a>
-                    <span>حساب جديد</span>
+                    <span>إضافة شركة توصيل</span>
                 </div>
             </div>
         </div>
@@ -43,32 +29,24 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <div class="register-form">
-                    <h2>إنشاء حساب جديد</h2>
-                    <p style="color: red;"><?php echo $_SESSION["register_error"]; ?></p>
-                    <form action="db/register.php" method="POST" name="register_form">
+                    <h2>إضافة شركة توصيل</h2>
+                    <p style="color: red;"><?php echo $_SESSION["delivery_company_register_error"]; ?></p>
+                    <form action="db/registerDC.php" method="POST">
                         <div class="group-input">
-                            <label for="first_name">الإسم الأول *</label>
-                            <input type="text" id="first_name" name="first_name" value="<?php echo $_SESSION["first_name"]; ?>" required>
+                            <label for="company_name">إسم الشركة *</label>
+                            <input type="text" name="company_name" required>
                         </div>
                         <div class="group-input">
-                            <label for="last_name">إسم العائلة *</label>
-                            <input type="text" id="last_name" name="last_name" value="<?php echo $_SESSION["last_name"]; ?>" required>
+                            <label for="company_phone">رقم الهاتف *</label>
+                            <input type="text" name="company_phone" required>
                         </div>
                         <div class="group-input">
-                            <label for="city">المدينة  *</label>
-                            <input type="text" id="city" name="city" value="<?php echo $_SESSION["city"]; ?>" required>
+                            <label for="delivery_price">( ₪ ) سعر التوصيل   *</label>
+                            <input type="number" name="delivery_price" required>
                         </div>
                         <div class="group-input">
-                            <label for="address">العنوان *</label>
-                            <input type="text" id="address" name="address" value="<?php echo $_SESSION["address"]; ?>" required>
-                        </div>
-                        <div class="group-input">
-                            <label for="phone">رقم الهاتف  *</label>
-                            <input type="text" id="phone" name="phone" value="<?php echo $_SESSION["phone"]; ?>" required>
-                        </div>
-                        <div class="group-input">
-                            <label for="email">البريد الإلكتروني   *</label>
-                            <input type="email" id="email" name="email" value="<?php echo $_SESSION["email"]; ?>" required>
+                            <label for="delivery_price">البريد الإلكتروني  *</label>
+                            <input type="email" name="email" required>
                         </div>
                         <div class="group-input">
                             <label for="pass">كلمة المرور *</label>
@@ -82,9 +60,6 @@
                         </div>
                         <button type="submit" id="submit" class="site-btn register-btn" disabled required>إنشاء حساب</button>
                     </form>
-                    <div class="switch-login">
-                        <a href="./login.php" class="or-login">أو قم بالتسجيل</a>
-                    </div>
                 </div>
             </div>
         </div>

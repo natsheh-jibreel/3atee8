@@ -1,4 +1,4 @@
-<?php include('header.html');?>
+<?php include('header.php');?>
 
 <!-- Breadcrumb Section Begin -->
 <div class="breacrumb-section">
@@ -6,8 +6,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text">
-                    <a href="#"><i class="fa fa-home"></i> Home</a>
-                    <span>Contact</span>
+                    <a href="#"><i class="fa fa-home"></i> الصفحة الرئيسية</a>
+                    <span>تواصل معنا</span>
                 </div>
             </div>
         </div>
@@ -21,27 +21,16 @@
         <div class="row">
             <div class="col-lg-5">
                 <div class="contact-title">
-                    <h4>Contacts Us</h4>
-                    <p>Contrary to popular belief, Lorem Ipsum is simply random text. It has roots in a piece of
-                        classical Latin literature from 45 BC, maki years old.</p>
+                    <h4>تواصل معنا</h4>
                 </div>
                 <div class="contact-widget">
-                    <div class="cw-item">
-                        <div class="ci-icon">
-                            <i class="ti-location-pin"></i>
-                        </div>
-                        <div class="ci-text">
-                            <span>Address:</span>
-                            <p>60-49 Road 11378 New York</p>
-                        </div>
-                    </div>
                     <div class="cw-item">
                         <div class="ci-icon">
                             <i class="ti-mobile"></i>
                         </div>
                         <div class="ci-text">
-                            <span>Phone:</span>
-                            <p>+65 11.188.888</p>
+                            <span>رقم الهاتف:</span>
+                            <p dir="ltr">+65 11.188.888</p>
                         </div>
                     </div>
                     <div class="cw-item">
@@ -49,8 +38,8 @@
                             <i class="ti-email"></i>
                         </div>
                         <div class="ci-text">
-                            <span>Email:</span>
-                            <p>hellocolorlib@gmail.com</p>
+                            <span>البريد الالكتروني:</span>
+                            <p>3atee8@gmail.com</p>
                         </div>
                     </div>
                 </div>
@@ -58,19 +47,19 @@
             <div class="col-lg-6 offset-lg-1">
                 <div class="contact-form">
                     <div class="leave-comment">
-                        <h4>Leave A Comment</h4>
-                        <p>Our staff will call back later and answer your questions.</p>
+                        <h4>أرسل رسالة</h4>
+                        <p>سوف نقوم بالتواصل معك والاجابة على جميع استفساراتك</p>
                         <form action="#" class="comment-form">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="Your name">
+                                    <input type="text" placeholder="الاسم" dir="rtl">
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="Your email">
+                                    <input type="text" placeholder="البريد الالكتروني" dir="rtl">
                                 </div>
                                 <div class="col-lg-12">
-                                    <textarea placeholder="Your message"></textarea>
-                                    <button type="submit" class="site-btn">Send message</button>
+                                    <textarea placeholder="الرسالة" dir="rtl"></textarea>
+                                    <button type="submit" class="site-btn">إرسال</button>
                                 </div>
                             </div>
                         </form>
