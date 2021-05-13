@@ -1,4 +1,13 @@
-<?php include("header.php");?>
+<?php include("header.php");
+if(isset($_SESSION["user_auth"])){
+    if(!($_SESSION["user_auth"] == true)){
+        header("location: login.php");
+    }
+}else{
+    header("location: login.php");
+}
+$user_id = $_SESSION["user_id"];
+?>
 <!-- Breadcrumb Section Begin -->
 <div class="breacrumb-section">
     <div class="container">
@@ -26,7 +35,7 @@
                 </tr>
                 <?php 
                 $counter = 1;
-                $sql = "SELECT product_id, product_name, user_id, category_id, is_promoted, amount_in_stock FROM Products ORDER BY product_id DESC";
+                $sql = "SELECT product_id, product_name, user_id, category_id, is_promoted, amount_in_stock FROM Products WHERE user_id = '$user_id' ORDER BY product_id DESC";
                 $result = mysqli_query($conn, $sql);
                 while($row = mysqli_fetch_assoc($result)){
                     $user_id = $row["user_id"];
@@ -42,7 +51,7 @@
                 ?>
                 <tr class="d-row">
                     <td><?php echo $counter; ?></td>
-                    <td><a href=""><?php echo $row["product_name"]; ?></a></td>
+                    <td><a href="productPage.php?product_id=<?php echo $row["product_id"];?>"><?php echo $row["product_name"]; ?></a></td>
                     <td><?php echo $category_name; ?></td>
                     <td><?php echo $row["amount_in_stock"]; ?></td>
                     <td style="display: inline-block;">
@@ -61,4 +70,4 @@
     </div>
 </div>
 
-<?php include("footer.html");?>
+<?php include("footer.php");?>

@@ -10,7 +10,7 @@ $address = $_SESSION["address"] = $_POST["address"];
 $phone = $_SESSION["phone"] = $_POST["phone"];
 $city = $_SESSION["city"] = $_POST["city"];
 $email = $_SESSION["email"] = $_POST["email"];
-$password = $_POST["password"];
+$password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
 $sql = "SELECT * FROM Users WHERE email='$email'";
 $result = mysqli_query($conn, $sql);

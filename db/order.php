@@ -18,8 +18,15 @@ $result = mysqli_query($conn, $sql);
 if($result == 1){
     $sql = "UPDATE Products SET amount_in_stock = amount_in_stock - $amount WHERE product_id = '$product_id'";
     $result2 = mysqli_query($conn, $sql);
-    if($result2 == 1)
-        header("location: ../userOrders.php");
+    if($result2 == 1){
+       ?>
+       <script>
+           alert('تمت عملية الشراء بنجاح!');
+           window.location = '../userProducts.php';
+       </script>
+       <?php
+    }
+        
 }
 echo mysqli_error($conn);
 

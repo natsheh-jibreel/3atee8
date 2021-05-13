@@ -15,7 +15,7 @@ $img_tmp_name = $img["tmp_name"];
 $tag = pathinfo($img_name, PATHINFO_EXTENSION);
 $new_name = $name . date("mdhi") . '.' . $tag;
 move_uploaded_file($img_tmp_name,  "../Assets/ProductsImages/$new_name");
-
+echo $img;
 $sql = "SELECT is_promoted FROM Users WHERE user_id = $user_id";
 $result1 = mysqli_query($conn, $sql);
 $user = mysqli_fetch_assoc($result1);
@@ -32,8 +32,14 @@ if($user["is_promoted"] == 1){
 $result = mysqli_query($conn, $sql);
 
 if($result == 1){
-    header("location: ../index.php");
+    echo '<script>
+    alert("تمت عملية اضافة المنتج بنجاح");
+    window.location = "'.$SITE_URL.'../userProducts.php";
+    </script>';
 }else{
-    echo mysqli_error($conn);
+    echo '<script>
+    alert("للاسف لم تتم عملية اضافة المنتج.. تأكد من المعلومات المدخلة");
+    window.location = "'.$SITE_URL.'../addItem.php";
+    </script>';
 }
 ?>

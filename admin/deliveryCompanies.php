@@ -1,6 +1,6 @@
 <?php 
     require('../db/db_connect.php');
-    include 'header.html';
+    include 'header.php';
 
 ?>
 <!-- Breadcrumb Section Begin -->
@@ -44,7 +44,7 @@
                         <a href="editCompany.php?id=<?php echo $row["company_id"]; ?>" style="display:inline-block;margin-top: 8px;">
                             <i style="color: green;font-size:x-large;padding:0 2px;margin: 0 2px;background-color:white;border:none;" class="fa fa-edit"></i>
                         </a>
-                        <a onclick="clicked();" href="db/deleteCompany.php?id=<?php echo $row["company_id"]; ?>" style="display:inline-block;">
+                        <a onclick="return confirm('هل انت متاكد انك تريد حذف شركة التوصيل؟');" href="db/deleteCompany.php?id=<?php echo $row["company_id"]; ?>" style="display:inline-block;">
                             <i style="color: red;font-size:x-large;padding:0 2px;margin: 0 2px;background-color:transparent;" class="fa fa-trash"></i>
                         </a>
                     </td>
@@ -59,14 +59,3 @@
     </div>
 </div>
 <?php include 'footer.html';?>
-
-<script type="text/javascript">
-    function clicked() {
-       if (confirm('هل انت متاكد انك تريد حذف هذا الصنف')) {
-           yourformelement.submit();
-       } else {
-           return false;
-       }
-    }
-
-</script>

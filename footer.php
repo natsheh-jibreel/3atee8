@@ -26,8 +26,7 @@
                     <ul>
                         <li><a href="register.php">تسجيل</a></li>
                         <li><a href="contact.php">تواصل معنا</a></li>
-                        <li><a href="#">سلة الشراء</a></li>
-                        <li><a href="#">تسوق</a></li>
+                        <li><a href="search.php?selling_status=بيع">تسوق</a></li>
                     </ul>
                 </div>
             </div>
@@ -35,10 +34,13 @@
                 <div class="footer-widget">
                     <h5>التصنيفات</h5>
                     <ul>
-                        <li><a href="#">تسجيل</a></li>
-                        <li><a href="#">تواصل معنا</a></li>
-                        <li><a href="#">سلة الشراء</a></li>
-                        <li><a href="#">تسوق</a></li>
+                    <?php
+                    $sql = "SELECT * FROM Category LIMIT 5";
+                    $result = mysqli_query($conn, $sql);
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo '<li><a href="search.php?category_id=', $row["category_id"],'">', $row["category_name"], '</a></li>';
+                    }
+                    ?>
                     </ul>
                 </div>
             </div>

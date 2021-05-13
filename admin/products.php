@@ -1,6 +1,6 @@
 <?php 
     require('../db/db_connect.php');
-    include 'header.html';
+    include 'header.php';
 
 ?>
 <!-- Breadcrumb Section Begin -->
@@ -47,7 +47,7 @@
                 ?>
                 <tr class="d-row">
                     <td><?php echo $counter; ?></td>
-                    <td><a href=""><?php echo $row["product_name"]; ?></a></td>
+                    <td><a href="productPage.php?product_id=<?php echo $row["product_id"];?>"><?php echo $row["product_name"]; ?></a></td>
                     <td><?php echo $category_name; ?></td>
                     <td><a href=""><?php echo $user_email; ?></a></td>
                     <td><?php echo $row["amount_in_stock"]; ?></td>
@@ -57,7 +57,7 @@
                             <i style="color: green;font-size:x-large;padding:0 2px;margin: 0 2px;background-color:white;border:none;" class="fa fa-star"></i>
                         </a>
                         <?php } ?>
-                        <a onclick="clicked();" href="db/deleteProduct.php?id=<?php echo $row["product_id"]; ?>" style="display:inline-block;">
+                        <a onclick="return confirm('هل انت متاكد انك تريد حذف هذا المنتج؟');" href="db/deleteProduct.php?id=<?php echo $row["product_id"]; ?>" style="display:inline-block;">
                             <i style="color: red;font-size:x-large;padding:0 2px;margin: 0 2px;background-color:transparent;" class="fa fa-trash"></i>
                         </a>
                     </td>
@@ -72,14 +72,3 @@
     </div>
 </div>
 <?php include 'footer.html';?>
-
-<script type="text/javascript">
-    function clicked() {
-       if (confirm('هل انت متاكد انك تريد حذف هذا المستخدم')) {
-           yourformelement.submit();
-       } else {
-           return false;
-       }
-    }
-
-</script>

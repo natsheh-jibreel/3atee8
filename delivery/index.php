@@ -66,7 +66,7 @@ if(!isset($_SESSION["dc_id"])){
                     $buyer = mysqli_fetch_assoc($buyerResult);
                     //product info:
                     $product_id = $order["product_id"];
-                    $productSql = "SELECT product_name, product_price, user_id FROM Products WHERE product_id = '$product_id'";
+                    $productSql = "SELECT product_id, product_name, product_price, user_id FROM Products WHERE product_id = '$product_id'";
                     $productResult = mysqli_query($conn, $productSql);
                     $product = mysqli_fetch_assoc($productResult);
                     
@@ -80,7 +80,7 @@ if(!isset($_SESSION["dc_id"])){
                 ?>
                 <tr class="d-row" <?php if($order["is_delivered"] == 1) echo 'style="background-color: rgba(30, 180, 30, 0.6);"' ?>>
                     <td><?php echo $counter; ?></td>
-                    <td><a href="#"><?php echo $product["product_name"]; ?></a></td>
+                    <td><a href="productPage.php?product_id=<?php echo $product["product_id"];?>"><?php echo $product["product_name"]; ?></a></td>
                     <td >
                         <?php echo $product["product_price"]; ?>
                         <input type="hidden" value="<?php echo $product["product_price"]; ?>" id="price<?php echo $counter;?>">

@@ -1,12 +1,12 @@
 <?php 
     require('../db/db_connect.php');
 
-    session_start();
+    include 'header.php';
     $id = $_GET["id"];
     $sql = "SELECT * FROM DeliveryCompanies WHERE company_id='$id'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
-    include 'header.html';
+    
 
 ?>
 <!-- Breadcrumb Section Begin -->

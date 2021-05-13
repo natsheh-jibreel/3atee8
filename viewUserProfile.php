@@ -1,5 +1,11 @@
 <?php include 'header.php';
-
+if(isset($_SESSION["user_auth"])){
+    if(!($_SESSION["user_auth"] == true)){
+        header("location: login.php");
+    }
+}else{
+    header("location: login.php");
+}
 $id = $_SESSION["user_id"];
 $sql = "SELECT * from Users WHERE user_id = '$id'";
 $result = mysqli_query($conn, $sql);
@@ -60,4 +66,4 @@ $email = $row["email"];
     </div>
 </div>
 <!-- Register Form Section End -->
-<?php include 'footer.html';?>
+<?php include 'footer.php';?>

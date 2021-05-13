@@ -7,8 +7,35 @@ if(!isset($_SESSION['admin_login_error'])){
 if(!isset($_SESSION['admin_username'])){
     $_SESSION['admin_username'] = '';
 }
-include 'header.html'; ?>
+?>
+<html lang="ar">
 
+<head dir="rtl">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عًتيق</title>
+
+    <!-- Styles -->
+    <!--<link rel="stylesheet" href="styles/bootstrap.min.css" type="text/css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.rtl.min.css" integrity="sha384-4dNpRvNX0c/TdYEbYup8qbjvjaMrgUPh+g4I03CnNtANuv+VAvPL6LqdwzZKV38G" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="../styles/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../styles/themify-icons.css" type="text/css">
+    <link rel="stylesheet" href="../styles/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="../styles/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../styles/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="../styles/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="../styles/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../styles/style.css" type="text/css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
 <!-- Breadcrumb Section Begin -->
 <div class="breacrumb-section">
     <div class="container">

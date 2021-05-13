@@ -1,4 +1,12 @@
-<?php include("header.php");?>
+<?php include("header.php");
+if(isset($_SESSION["user_auth"])){
+    if(!($_SESSION["user_auth"] == true)){
+        header("location: login.php");
+    }
+}else{
+    header("location: login.php");
+}
+?>
 
 <!-- Breadcrumb Section Begin -->
 <div class="breacrumb-section">
@@ -42,7 +50,7 @@
                         </div>
                         <label for="name">وصف المنتج</label>
                         <div class="group-input">
-                            <textarea dir="rtl" id="editor1" name="describtion" rows="5" form="add-item" required></textarea>
+                            <textarea dir="rtl" id="editor1" name="describtion" rows="5" form="add-item" limit="2500" required></textarea>
                         </div>
                         <div class="group-input">
                             <label for="address"> الموقع</label>
@@ -71,7 +79,7 @@
                         </div>
                         <div class="group-input">
                             <label id="price-label" for="price">(₪)السعر  </label>
-                            <input type="number" id="price" name="price" required>
+                            <input type="number" id="price" name="price" value=0 required>
                         </div>
                         <div class="group-input">
                             <img src="" alt="" id="product-img">
@@ -87,7 +95,7 @@
 </div>
 <!-- Register Form Section End -->
 
-<?php include("footer.html") ?>
+<?php include("footer.php") ?>
 
 <script>
 function fileValidation() {

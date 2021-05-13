@@ -52,4 +52,4 @@ if(!isset($_SESSION['email'])){
 </div>
 <!-- Register Form Section End -->
 
-<?php include("footer.html") ?>
+<?php include("footer.php") ?>

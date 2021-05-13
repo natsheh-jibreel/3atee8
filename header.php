@@ -32,59 +32,90 @@ require("db/db_connect.php");
 
 <body>
     <!-- Header Section Begin -->
-    <header class="header-section">
-        <div class="nav-item">
-            <div class="container" dir="rtl">
-                <nav class="nav-menu mobile-menu">
-                    <ul>
-                        <div class="right-nav">
-                            <li class="active"><a href="./index.php">الصفحة الرئيسية</a></li>
-                            <li><a href="#">الأصناف</a>
-                                <ul class="dropdown">
-                                    <?php
-                                    $sql = "SELECT * FROM Category";
-                                    $result = mysqli_query($conn, $sql);
-                                    while($row = mysqli_fetch_assoc($result)){
-                                        echo '<li><a href="search.php?category_id=', $row["category_id"],'">', $row["category_name"], '</a></li>';
-                                    }
-                                    ?>
-                                </ul>
-                            </li>
-                            <li><a href="#">ابحث عن</a>
-                                <ul class="dropdown">
-                                    <li><a href="search.php?selling_status=بيع">شراء</a></li>
-                                    <li><a href="search.php?selling_status=اقراض">استئجار</a></li>
-                                    <li><a href="search.php?selling_status=تبرع">تبرع</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./contact.php">تواصل معنا</a></li>
-                        </div>
-
-                        <div class="left-nav">
-                        <?php 
-                        if(isset($_SESSION["user_auth"])){
-                            if($_SESSION["user_auth"] == true){
-                                echo '<li><a href="addItem.php">اعرض منتجك</a></li>';
-                                echo '<li><a href="#">حسابي</a>
-                                        <ul class="dropdown">
-                                                <li><a href="viewUserProfile.php">عرض الملف الشخصي</a></li>
-                                                <li><a href="userProducts.php">منتجاتي</a></li>
-                                                <li><a href="userOrders.php?user_id='.$_SESSION["user_id"].'">مشترياتي</a></li>
-                                                <li><a href="db/logout.php">تسجيل الخروج</a></li>
-                                        </ul>
-                                    </li>';
+    <header class="header-section" dir="rtl">
+    <nav class="navbar navbar-expand-md navbar-hover">
+        <a class="navbar-brand" href="#"><img src="" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHover" aria-controls="navbarDD" aria-expanded="false" aria-label="Navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse topnav" id="navbarHover">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="./index.php">الصفحة الرئيسية<span class="sr-only">(current)</span></a>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        الأصناف 
+                    </a>
+                    <ul class="dropdown-menu">
+                        <?php
+                        $sql = "SELECT * FROM Category WHERE parent_id is NULL";
+                        $result = mysqli_query($conn, $sql);
+                        while($row = mysqli_fetch_assoc($result)){
+                            echo '<li><a class="dropdown-item" href="search.php?category_id=', $row["category_id"],'"><img src="Assets/CategoriesImages/',$row["img"],'" /><p>', $row["category_name"], '</p></a>
+                            <ul class="dropdown-menu submenu">';
+                            $p_id = $row["category_id"];
+                            $sql = "SELECT * FROM Category WHERE parent_id = '$p_id'";
+                            $c_result = mysqli_query($conn, $sql);
+                            while($c_row = mysqli_fetch_assoc($c_result)){
+                                echo '<li><a class="dropdown-item" href="search.php?category_id=', $c_row["category_id"],'"><img src="Assets/CategoriesImages/',$c_row["img"],'" /><p>', $c_row["category_name"], '</p></a></li>';
                             }
-                        }else{
-                            echo  '<li><a href="./register.php">التسجيل</a></li>
-                                    <li><a href="./login.php" class="login-panel"><i class="fa fa-user"></i>  تسجيل الدخول</a></li>';
+                            echo '</ul></li>';
                         }
                         ?>
-                        </div>
-
                     </ul>
-                </nav>
-                <div id="mobile-menu-wrap"></div>
-            </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        تبحث عن: 
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="search.php?selling_status=بيع"><p>شراء</p></a></li>
+                        <li><a class="dropdown-item" href="search.php?selling_status=اقراض"><p>استئجار</p></a></li>
+                        <li><a class="dropdown-item" href="search.php?selling_status=تبرع"><p>تبرع</p></a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./contact.php">تواصل معنا</a>
+                </li>
+                <?php 
+                if(isset($_SESSION["user_auth"])){
+                    if($_SESSION["user_auth"] == true){
+                        echo '<li class="nav-item"><a class="nav-link" href="addItem.php">اعرض منتجك</a></li>';
+                        echo '<li  class="nav-item dropdown">
+                                <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    حسابي
+                                </a>
+                                <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="viewUserProfile.php"><p>عرض الملف الشخصي</p></a></li>
+                                        <li><a class="dropdown-item" href="userProducts.php"><p>منتجاتي</p></a></li>
+                                        <li><a class="dropdown-item" href="userOrders.php?user_id='.$_SESSION["user_id"].'"><p>مشترياتي</p></a></li>
+                                        <li><a class="dropdown-item" href="db/logout.php"><p>تسجيل الخروج</p></a></li>
+                                </ul>
+                            </li>';
+                    }
+                }else{
+                    echo  '<li class="nav-item"><a class="nav-link" href="./register.php">التسجيل</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./login.php" class="login-panel"><i class="fa fa-user"></i>  تسجيل الدخول</a></li>';
+                }
+                ?>
+            </ul>
         </div>
+        <div class="search-container">
+            <input onchange="search()" id="search_text" type="text" placeholder="ابحث..." name="search">
+            <button><a href="#" id="search_btn"><i class="fa fa-search"></i></a></button>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+    </nav>
+    
     </header>
     <!-- Header End -->
+
+    <script>
+        function search(){
+            var text = document.getElementById("search_text");
+            var sbmtBtn = document.getElementById("search_btn");
+            sbmtBtn.href = "search.php?search=" + text.value;
+        }
+    </script>

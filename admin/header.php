@@ -1,3 +1,9 @@
+<?php  
+session_start();
+if(!isset($_SESSION["admin_auth"])){
+    header("location: login.php");
+}
+?>
 <html lang="ar">
 
 <head dir="rtl">
@@ -40,8 +46,7 @@
                             <li><a href="./newCategory.php">إضافة صنف</a></li>
                             <li><a href="./deliveryCompanies.php">شركات التوصيل</a></li>
                             <li><a href="./registerDeliveryCompany.php">إضافة شركة توصيل</a></li>
-                            <li><a href="./ads.php">الإعلانات</a></li>
-                            <li><a href="./newAD.php">إضافة إعلان</a></li>
+                            <li><a href="./db/logout.php">تسجيل الخروج</a></li>
                         </div>
                     </ul>
                 </nav>

@@ -1,6 +1,6 @@
 <?php 
     require('../db/db_connect.php');
-    include 'header.html';
+    include 'header.php';
 
 ?>
 <!-- Breadcrumb Section Begin -->
@@ -45,7 +45,7 @@
                             <i style="color: green;font-size:x-large;padding:0 2px;margin: 0 2px;background-color:white;border:none;" class="fa fa-star"></i>
                         </a>
                         <?php } ?>
-                        <a onclick="clicked();" href="db/deleteUser.php?id=<?php echo $row["user_id"]; ?>" style="display:inline-block;">
+                        <a onclick="return confirm('هل انت متاكد انك تريد حذف هذا المستخدم؟');" href="db/deleteUser.php?id=<?php echo $row["user_id"]; ?>" style="display:inline-block;">
                             <i style="color: red;font-size:x-large;padding:0 2px;margin: 0 2px;background-color:transparent;" class="fa fa-trash"></i>
                         </a>
                     </td>
@@ -60,14 +60,3 @@
     </div>
 </div>
 <?php include 'footer.html';?>
-
-<script type="text/javascript">
-    function clicked() {
-       if (confirm('هل انت متاكد انك تريد حذف هذا المستخدم')) {
-           yourformelement.submit();
-       } else {
-           return false;
-       }
-    }
-
-</script>

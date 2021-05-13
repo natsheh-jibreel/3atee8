@@ -70,4 +70,4 @@
     </div>
 </section>
 <!-- Contact Section End -->
-<?php include('footer.html');?>
+<?php include('footer.php');?>

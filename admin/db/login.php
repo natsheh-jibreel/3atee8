@@ -10,7 +10,7 @@ if($username == "admin"){
         $_SESSION["admin_auth"] = true;
         header("location: ../index.php");
     }else{
-        $_SESSION["admin_login_error"] = "Username or Password is Incorrect";
+        $_SESSION["admin_login_error"] = "اسم المستخدم او كلمة المرور غير صحيحة";
         header("location: ../login.php");
     }
 }

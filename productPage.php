@@ -1,7 +1,11 @@
 <?php include 'header.php';?>
 <?php
-if(!$_SESSION["user_auth"]==1){
-    header("login.php");
+if(isset($_SESSION["user_auth"])){
+    if(!($_SESSION["user_auth"] == true)){
+        header("location: login.php");
+    }
+}else{
+    header("location: login.php");
 }
 $product_id = $_GET["product_id"];
 $sql = "SELECT * FROM Products WHERE product_id = '$product_id'";
@@ -29,6 +33,7 @@ $categoryRow = mysqli_fetch_assoc($categoryResult);
             <div class="info col-md-6">
                 <form action="db/order.php" method="post">
                     <input type="hidden" name="product_id" value="<?php echo $productRow["product_id"]; ?>">
+                    <input type="hidden" name="selling_status" value="<?php echo $productRow["selling_status"]; ?>">
                     <div class="row">
                         <div class="col-md-12">
                             <h1><?php echo $productRow["product_name"]; ?></h1>
@@ -43,27 +48,43 @@ $categoryRow = mysqli_fetch_assoc($categoryResult);
                         </div> 
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
-                            <p class="description"><?php echo $productRow["describtion"] ;?></p>
+                        <div class="col-md-12 outer">
+                            <p class="inner"><?php echo $productRow["describtion"] ;?></p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 bottom-rule">
                             <h2 class="product-price">₪<b id="price"><?php echo $productRow["product_price"] ;?></b>.00</h2>
-                            <select name="delivery_company_id" id="dc_id" onchange="changeDc(), rdc_price.value = ((this.options[this.selectedIndex].text).replace(/[^0-9]/g,'')), updateTotal()" required>
-                                <option value="" disabled selected>اختر شركة التوصيل</option>
-                                <option value="non">سأقوم بأخذ المنتج بنفسي</option>
-                                <?php 
-                                $sql = "SELECT * FROM DeliveryCompanies";
-                                $result = mysqli_query($conn, $sql);
-                                while($row = mysqli_fetch_assoc($result)){
-                                    echo '<option value="'.$row["company_id"].'">'.$row["company_name"].' + '. $row["delivery_price"].' ₪ </option>';
-                                }
+                            <br>
+                            <br>
+                            <br>
+                            <div class="checkout-content">
+                                <label for="delivery_company_id">اختر شركة التوصيل</label>
+                                <br>
+                                <select name="delivery_company_id" id="dc_id" onchange="changeDc(), rdc_price.value = ((this.options[this.selectedIndex].text).replace(/[^0-9]/g,'')), updateTotal()" required>
+                                    <option value="non">سأقوم بأخذ المنتج بنفسي</option>
+                                    <?php 
+                                    $sql = "SELECT * FROM DeliveryCompanies";
+                                    $result = mysqli_query($conn, $sql);
+                                    while($row = mysqli_fetch_assoc($result)){
+                                        echo '<option value="'.$row["company_id"].'">'.$row["company_name"].' + '. $row["delivery_price"].' ₪ </option>';
+                                    }
                                 
-                                ?>
-                            </select>
+                                    ?>
+                                </select>
+                            </div> 
                         </div>
                     </div>
+                    <?php if($productRow["selling_status"] == 'اقراض')
+                    echo '<div class="row">
+                        <div class="col-md-12">
+                            <div class="checkout-content">
+                                <label for="duration">عدد ايام الاستئجار</label>
+                                <input type="number" name="duration" value="1" onload="rduration.value = duration.value" onchange="rduration.value = duration.value" required>
+                            </div>
+                        </div>
+                    </div>';
+                    ?>
                     <div class="row add-to-cart">
                         <div class="col-md-6 product-qty">
                             
@@ -72,7 +93,7 @@ $categoryRow = mysqli_fetch_assoc($categoryResult);
                             </span>
                         
                             <input type="hidden" id="max" value="<?php echo $productRow["amount_in_stock"] ;?>">
-                            <input id="amount" name="amount" class="btn btn-default btn-lg btn-qty" value="1" />
+                            <input id="amount" name="amount" class="btn btn-default btn-lg btn-qty" style="padding:0;" value="1" />
 
                             <span class="btn btn-default btn-lg btn-qty" onclick="if(parseInt(amount.value)!=1)amount.value = ramount.value = parseInt(amount.value) + parseInt(minus.value), updateTotal()">
                                 <span class="glyphicon glyphicon-minus" aria-hidden="true"><input type="hidden" id="minus" value="-1"></span>
@@ -89,34 +110,42 @@ $categoryRow = mysqli_fetch_assoc($categoryResult);
                                         <td><u>اسم المنتج</u></td>  
                                         <td><u>السعر</u></td>  
                                         <td><u>الكمية</u></td> 
+                                        <?php if($productRow["selling_status"] == 'اقراض')
+                                        echo '<td><u>عدد ايام الاستئجار</u></td>';
+                                        ?>
                                         <td><u>سعر التوصيل</u></td>  
                                     </tr>
                                     <tr>
                                         <td><?php echo $productRow["product_name"]; ?></td>
                                         <td><output><?php echo $productRow["product_price"]; ?></output></td>
                                         <td><output id="ramount"></output></td>
+                                        <?php if($productRow["selling_status"] == 'اقراض')
+                                        echo '<td><output id="rduration"></output></td>';
+                                        ?>
                                         <td><output id="rdc_price"></output></td>
                                     </tr>
                                     <td>المجموع: <output id="total"></output></td>  
-                                </table>    
+                                </table>   
+                                <a><i class="fab fa-paypal"></i></a>
+ 
                             </div>                            
 
                             <button type="submit" class="btn">تأكيد</button>
                             <button type="button" class="btn cancel" onclick="closeForm()">إلغاء</button>
                         </div>
                     </div>
+
                 </form>
                 <div class="row">
                     <div class="col-md-6" style="float: left;">
-                        <button id="orderbtn" class="btn btn-lg btn-brand" onclick="openForm(), ramount.value = amount.value, rdc_price = parseInt(dc_id.options[dc_id.selectedIndex].text), updateTotal()" disabled>
+                        <button id="orderbtn" class="btn btn-lg btn-brand" onclick="openForm(), ramount.value = amount.value, rdc_price = parseInt(dc_id.options[dc_id.selectedIndex].text), updateTotal()">
                         طلب
                         </button>
                     </div>
                 </div>                    
                 <div class="row">
-                    <div class="col-md-3 text-center">
-                        <span class="monospaced"><?php echo $productRow["amount_in_stock"] ;?></span>
-                        <span class="monospaced">In Stock</span>
+                    <div class="col-md-12">
+                        <h3 class="monospaced"><?php echo $productRow["amount_in_stock"] ;?> :الكميةالمتوفرة</h3>
                     </div>
                 </div>
                 <div class="row">
@@ -130,8 +159,49 @@ $categoryRow = mysqli_fetch_assoc($categoryResult);
     </div>
 </section>
 
+<section class="latest-blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2> المنتجات مشابهة</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row" dir="rtl">
+            <?php 
+            $sql = "SELECT * FROM Products WHERE amount_in_stock > 0 AND category_id = '$category_id' ORDER BY product_id DESC LIMIT 4";
+            $result1 = mysqli_query($conn, $sql);
+            while($row = mysqli_fetch_assoc($result1)){
+                $category_id = $row["category_id"];
+                $sql2 = "SELECT category_name FROM Category WHERE category_id = '$category_id'";
+                $result2 = mysqli_query($conn, $sql2);
+                $row2 = mysqli_fetch_assoc($result2);
+                echo '<div class="col-lg-3 col-md-6">
+                        <a href="productPage.php?product_id='.  $row["product_id"] .'">
+                            <div class="product-item">
+                                <div class="pi-pic">
+                                    <img src="Assets/ProductsImages/'.  $row["product_image"] .'" alt="">
+                                </div>
+                                <div class="pi-text">
+                                    <div class="catagory-name">'.  $row2["category_name"] . ' | ' .  $row["selling_status"] . ' | ' .  $row["product_status"] . '</div>
+                                    <h5>'.  $row["product_name"] .'</h5>
+                                    <div class="product-price">
+                                        ₪'.  $row["product_price"] .'.00
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>';
+            }
+            ?>
+        </div>
+    </div>
+</section>
 
-<?php include 'footer.html'; ?>
+
+
+<?php include 'footer.php'; ?>
 <script>
     /*Swal.fire({
         title: 'rrrrr!',
@@ -156,7 +226,11 @@ $categoryRow = mysqli_fetch_assoc($categoryResult);
         var dc_price = document.getElementById("rdc_price").value;
         var amount = document.getElementById("ramount").value;
         var price = document.getElementById("price").innerHTML;
-
+        <?php if($productRow["selling_status"] == 'اقراض')
+                echo 'var days = document.getElementById("rduration").value;';
+            else
+                echo 'var days = 1;';
+        ?>
 
         var r = 0;
         var parsed = parseInt(dc_price);
@@ -167,7 +241,13 @@ $categoryRow = mysqli_fetch_assoc($categoryResult);
         }
 
         var total = document.getElementById("total");
-        total.value =  r + parseInt(amount) * parseInt(price);
+        total.value =  r + parseInt(amount) * parseInt(price) * parseInt(days);
 
+    }
+
+    function orderbtnCheck(){
+        if (document.getElementById("orderbtn").disabled) {
+            alert("يرجى اختيار طريقة التوصيل");
+        }
     }
 </script>

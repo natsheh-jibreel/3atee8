@@ -1,5 +1,11 @@
 <?php include 'header.php';
-
+if(isset($_SESSION["user_auth"])){
+    if(!($_SESSION["user_auth"] == true)){
+        header("location: login.php");
+    }
+}else{
+    header("location: login.php");
+}
 $id = $_SESSION["user_id"];
 $sql = "SELECT * from Users WHERE user_id = '$id'";
 $result = mysqli_query($conn, $sql);
@@ -53,7 +59,7 @@ $email = $row["email"];
                         </div>
                         <div class="group-input">
                             <label for="phone">رقم الهاتف  *</label>
-                            <input type="text" id="phone" name="phone" value="<?php echo $phone; ?>" required>
+                            <input type="number" id="phone" name="phone" value="<?php echo $phone; ?>" required>
                         </div>
                         <div class="group-input">
                             <label for="email">البريد الإلكتروني   *</label>
@@ -67,4 +73,4 @@ $email = $row["email"];
     </div>
 </div>
 <!-- Register Form Section End -->
-<?php include 'footer.html';?>
+<?php include 'footer.php';?>
