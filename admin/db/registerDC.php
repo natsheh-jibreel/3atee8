@@ -16,5 +16,5 @@ if($result)
     $_SESSION["delivery_company_register_error"] = "Company Added Successfully";
 else
     $_SESSION["delivery_company_register_error"] = "Error Occured";
-header("location: ../deliveryCompany.php");
+header("location: ../deliveryCompanies.php");
 ?>

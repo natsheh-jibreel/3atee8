@@ -16,6 +16,11 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <div class="row" dir="rtl">
+        <a class="btn site-btn btn-primary" style="margin: 20px 0;" href="newCategory.php">إضافة صنف جديد</a>
+    </div>
+</div>
 <!-- Breadcrumb Form Section Begin -->
 <div class="table-section">
     <div class="container">

@@ -74,13 +74,13 @@ if(!isset($_SESSION["dc_id"])){
                     $seller_id = $product["user_id"];
                     $sellerSql = "SELECT CONCAT(first_name , ' ' , last_name) as name, CONCAT(city , ' / ' , address) as location, mobile_numebr 
                                 FROM Users WHERE user_id = '$seller_id'";
-                    $sellerResult = mysqli_query($conn, $buyerSql);
+                    $sellerResult = mysqli_query($conn, $sellerSql);
                     $seller = mysqli_fetch_assoc($sellerResult);
                     
                 ?>
                 <tr class="d-row" <?php if($order["is_delivered"] == 1) echo 'style="background-color: rgba(30, 180, 30, 0.6);"' ?>>
                     <td><?php echo $counter; ?></td>
-                    <td><a href="productPage.php?product_id=<?php echo $product["product_id"];?>"><?php echo $product["product_name"]; ?></a></td>
+                    <td><a href="../productPage.php?product_id=<?php echo $product["product_id"];?>"><?php echo $product["product_name"]; ?></a></td>
                     <td >
                         <?php echo $product["product_price"]; ?>
                         <input type="hidden" value="<?php echo $product["product_price"]; ?>" id="price<?php echo $counter;?>">

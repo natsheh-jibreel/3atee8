@@ -1,5 +1,7 @@
 <?php  
 session_start();
+require('../db/db_connect.php');
+
 if(!isset($_SESSION["admin_auth"])){
     header("location: login.php");
 }
@@ -43,9 +45,7 @@ if(!isset($_SESSION["admin_auth"])){
                             <li><a href="./users.php">المستخدمين</a></li>
                             <li><a href="./products.php">المنتجات</a></li>
                             <li><a href="./categories.php">التصنيفات</a></li>
-                            <li><a href="./newCategory.php">إضافة صنف</a></li>
                             <li><a href="./deliveryCompanies.php">شركات التوصيل</a></li>
-                            <li><a href="./registerDeliveryCompany.php">إضافة شركة توصيل</a></li>
                             <li><a href="./db/logout.php">تسجيل الخروج</a></li>
                         </div>
                     </ul>

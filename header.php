@@ -91,6 +91,7 @@ require("db/db_connect.php");
                                         <li><a class="dropdown-item" href="viewUserProfile.php"><p>عرض الملف الشخصي</p></a></li>
                                         <li><a class="dropdown-item" href="userProducts.php"><p>منتجاتي</p></a></li>
                                         <li><a class="dropdown-item" href="userOrders.php?user_id='.$_SESSION["user_id"].'"><p>مشترياتي</p></a></li>
+                                        <li><a class="dropdown-item" href="userSells.php?user_id='.$_SESSION["user_id"].'"><p>مبيعاتي</p></a></li>
                                         <li><a class="dropdown-item" href="db/logout.php"><p>تسجيل الخروج</p></a></li>
                                 </ul>
                             </li>';

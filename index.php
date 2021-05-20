@@ -32,6 +32,42 @@ $result = mysqli_query($conn, $sql);
     </div>
 </section>
 
+<!-- Categories -->
+<section class="latest-blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2> ابرز التصنيفات</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row" dir="rtl">
+            <?php 
+            $sql = "SELECT Category.category_id, Category.category_name, Category.img, COUNT(Category.category_id) FROM Category LEFT JOIN Products ON Category.category_id = Products.category_id GROUP BY Category.category_id ORDER BY COUNT(Category.category_id) DESC LIMIT 4";
+            $result1 = mysqli_query($conn, $sql);
+            echo mysqli_error($conn);
+            while($row = mysqli_fetch_assoc($result1)){
+                echo '<div class="col-lg-3 col-md-6">
+                        <a href="search.php?category_id='.  $row["category_id"] .'">
+                            <div class="product-item">
+                                <div class="pi-pic">
+                                    <img src="Assets/CategoriesImages/'.  $row["img"] .'" alt="">
+                                </div>
+                                <div class="pi-text">
+                                    <h5>'.  $row["category_name"] .'</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>';
+            }
+            ?>
+        </div>
+    </div>
+</section>
+
+
+
 <!-- Top Products -->
 <section class="latest-blog">
     <div class="container">

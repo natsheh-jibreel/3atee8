@@ -126,7 +126,12 @@ $categoryRow = mysqli_fetch_assoc($categoryResult);
                                     </tr>
                                     <td>المجموع: <output id="total"></output></td>  
                                 </table>   
-                                <a><i class="fab fa-paypal"></i></a>
+                                <div class="payment-methods">
+                                    <h5>:اختر وسيلة الدفع</h5>
+                                    <a href="#"><i class="fa fa-paypal" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-ils" aria-hidden="true"></i></a>
+                                </div>
+                                
  
                             </div>                            
 
