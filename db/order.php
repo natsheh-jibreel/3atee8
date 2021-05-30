@@ -1,6 +1,13 @@
 <?php
 require("./db_connect.php"); 
 session_start();
+if(isset($_SESSION["user_auth"])){
+    if(!($_SESSION["user_auth"] == true)){
+        header("location: login.php");
+    }
+}else{
+    header("location: login.php");
+}
 $user_id = $_SESSION["user_id"];
 $product_id = $_POST["product_id"];
 $delivery_company_id = $_POST["delivery_company_id"];

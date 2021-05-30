@@ -12,10 +12,10 @@
                     </div>
                     <ul>
                         <li>هاتف:
-                            <a href="tel: +65 11.188.888">+65 11.188.888</a>
+                            <a href="tel: +970 592956266" dir="ltr">+970 592956266</a>
                         </li>
                         <li>البريد الالكتروني:
-                            <a href="mailto:3atee8@gmail.com?subject = Feedback&body = Message">3atee8@gmail.com</a>
+                            <a href="mailto:info@3atee8.com">info@3atee8.com</a>
                         </li>
                     </ul>
                 </div>

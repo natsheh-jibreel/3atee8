@@ -7,6 +7,7 @@ if(isset($_SESSION["user_auth"])){
 }else{
     header("location: login.php");
 }
+$rater_id = $_SESSION["user_id"];
 $product_id = $_GET["product_id"];
 $sql = "SELECT * FROM Products WHERE product_id = '$product_id'";
 $productResult = mysqli_query($conn, $sql);
@@ -22,6 +23,22 @@ $categorySql = "SELECT category_name FROM Category WHERE category_id = '$categor
 $categoryResult = mysqli_query($conn, $categorySql);
 $categoryRow = mysqli_fetch_assoc($categoryResult);
 
+if (isset($_POST['save'])) {
+    $ratedIndex = $conn->real_escape_string($_POST['ratedIndex']);
+    $sql2 = "SELECT user_id FROM user_rating WHERE user_id = '$rater_id'";
+    $result = mysqli_query($conn, $sql2);
+    if(mysqli_num_rows($result) > 0){
+        $conn->query("UPDATE user_rating SET rating = '$ratedIndex' WHERE rater_id = '$rater_id'");
+    }else
+        $conn->query("INSERT INTO user_rating VALUES ('$user_id', '$rater_id', '$ratedIndex'");
+}
+$avg_rate_sql = "SELECT AVG(rating) as rate FROM user_rating WHERE user_id = '$user_id'";
+$avg_rate_result = mysqli_query($conn, $avg_rate_sql);
+$avg_rate_row = mysqli_fetch_assoc($avg_rate_result);
+$avg_rate = $avg_rate_row["rate"];
+if($avg_rate == NULL){
+    $avg_rate = 0;
+}
 ?>
 
 <section class="product-section">
@@ -50,6 +67,16 @@ $categoryRow = mysqli_fetch_assoc($categoryResult);
                     <div class="row">
                         <div class="col-md-12 outer">
                             <p class="inner"><?php echo $productRow["describtion"] ;?></p>
+                        </div>
+                    </div>
+                    <div class="row" dir="rtl">
+                        <div class="col-md-6" dir="ltr">
+                            <span class="glyphicon glyphicon-star" data-index="0" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" data-index="1" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" data-index="2" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" data-index="3" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-star" data-index="4" aria-hidden="true"></span>
+                            <span class="label label-success">61</span>
                         </div>
                     </div>
                     <div class="row">
@@ -162,6 +189,39 @@ $categoryRow = mysqli_fetch_assoc($categoryResult);
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
+    <div class="container comments-section">
+        <div class="row" dir="rtl">
+            <div class="col-md-12">
+                <h2>التعليقات</h2>
+                <?php
+                $sql = "SELECT product_comments.comment, CONCAT(Users.first_name, ' ', Users.last_name) as name, product_comments.date 
+                        FROM product_comments 
+                        LEFT JOIN Users 
+                        on product_comments.user_id = Users.user_id 
+                        WHERE product_comments.product_id = $product_id
+                        ORDER BY product_comments.date DESC";
+
+                $result = mysqli_query($conn, $sql);
+                while($row = mysqli_fetch_assoc($result)){
+                ?>
+                <div class="comment">
+                    <h5 class="writer"><?php echo $row["name"]; ?><p style="color: grey;font-size: 12px;"><?php echo $row["date"]; ?></p></h5>
+                    <div class="col-8" style="font-size: small;"><?php echo $row["comment"]; ?></div>
+                </div>
+                <?php } ?>
+                <div class="add-comment">
+                    <form action="db/addComment.php" method="POST">
+                        <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+                        <textarea name="comment" id="" rows="5" maxlength="2500" placeholder="اكتب تعليقك"></textarea>
+                        <input type="submit" value="ارسال التعليق">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="latest-blog">
@@ -254,5 +314,52 @@ $categoryRow = mysqli_fetch_assoc($categoryResult);
         if (document.getElementById("orderbtn").disabled) {
             alert("يرجى اختيار طريقة التوصيل");
         }
+    }
+</script>
+<script src="http://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+<script>
+    var ratedIndex = -1;
+
+    $(document).ready(function(){
+        resetStarColors();
+
+
+        $('.glyphicon-star').on('click', function () {
+            ratedIndex = parseInt($(this).data('index'));
+            saveToTheDB(ratedIndex);
+        });
+
+
+
+        $('.glyphicon-star').mouseover(function(){
+            resetStarColors();
+            var currentIndex = parseInt($(this).data('index'));
+
+            for (var i=0; i <= currentIndex; i++)
+                 $('.glyphicon-star:eq('+i+')').css('color', 'green');
+
+        });
+        $('.glyphicon-star').mouseleave(function(){
+            resetStarColors();
+        });
+    });
+
+    function resetStarColors(){
+        $('.glyphicon-star').css('color', 'black');
+        for (var i=0; i <= <?php echo $avg_rate; ?>; i++)
+            $('.glyphicon-star:eq('+i+')').css('color', 'green');
+
+    }
+
+    function saveToTheDB(rate) {
+        $.ajax({
+            url: "productPage.php?product_id=<?php echo $product_id; ?>",
+            method: "POST",
+            dataType: 'json',
+            data: {
+                save: 1,
+                ratedIndex: rate
+            }
+        });
     }
 </script>

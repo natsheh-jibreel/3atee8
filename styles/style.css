@@ -4235,3 +4235,47 @@ Header
     .payment-methods a:hover {
         color: #e7ab3c;
     }
+    
+    .glyphicon {
+        font-weight: bold;
+    }
+    
+    .product-section .info .label {
+        font-size: medium;
+    }
+    
+    .comments-section .comment {
+        background-color: #f3f3f3;
+        border-radius: 25px;
+        padding: 15px 10px;
+        margin: 12px 0;
+    }
+    
+    .comments-section .add-comment {
+        background-color: #f3f3f3;
+        border-radius: 25px;
+        padding: 15px 10px;
+        margin: 12px 0;
+    }
+    
+    .comments-section .add-comment textarea {
+        font-size: small;
+        background-color: #f3f3f3;
+        width: 100%;
+        border-radius: 5px;
+        border-color: white;
+        margin: 12px 0;
+    }
+    
+    .comments-section .add-comment input {
+        font-size: small;
+        background-color: #4CAF50;
+        border-radius: 5px;
+        border-color: white;
+        padding: 6px 8px;
+        color: white;
+    }
+    
+    .glyphicon-star {
+        font-size: 1.5rem;
+    }

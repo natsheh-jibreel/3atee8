@@ -3,7 +3,7 @@
 $db['db_host']='localhost';
 $db['db_user']='root';
 $db['db_pass']='';
-//$db['db_user']='3ateeq';
+//$db['db_user']='aateeq';
 //$db['db_pass']='12345';
 $db['db_name']='3ateeq';
 

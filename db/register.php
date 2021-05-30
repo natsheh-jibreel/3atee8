@@ -15,7 +15,7 @@ $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 $sql = "SELECT * FROM Users WHERE email='$email'";
 $result = mysqli_query($conn, $sql);
 if(mysqli_num_rows($result) != 0){
-    $_SESSION["register_error"] = "Email is already registered";
+    $_SESSION["register_error"] = "هذا البريد الالكتروني مسجل مسبقاً";
     header('location: ../register.php');
 }
     

@@ -1,4 +1,4 @@
-<?php include 'header.php'; 
+<?php 
 if(isset($_SESSION["user_auth"])){
     if(!($_SESSION["user_auth"] == true)){
         header("location: login.php");
@@ -6,6 +6,7 @@ if(isset($_SESSION["user_auth"])){
 }else{
     header("location: login.php");
 }
+include 'header.php'; 
 ?>
 <!-- Breadcrumb Section Begin -->
 <div class="breacrumb-section">
@@ -51,7 +52,7 @@ if(isset($_SESSION["user_auth"])){
                     <td><?php echo $counter; ?></td>
                     
                     <td><a href="productPage.php?product_id=<?php echo $product_id;?>"><?php echo $product_name; ?></a></td>
-                    <td >
+                    <td>
                         <?php echo $product_price; ?>
                         <input type="hidden" value="<?php echo $product_price; ?>" id="price<?php echo $counter;?>">
                     </td>

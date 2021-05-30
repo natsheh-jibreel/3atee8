@@ -1,5 +1,4 @@
 <?php 
-    require('../db/db_connect.php');
     include 'header.php';
 
 ?>
@@ -37,7 +36,7 @@
                 <tr class="d-row">
                     <td><?php echo $counter; ?></td>
                     <td><?php echo $row["first_name"] . ' ' . $row["last_name"] ; ?></td>
-                    <td><?php echo $row["email"]; ?></td>
+                    <td><a href="mailto: <?php echo $row["email"]; ?>"><?php echo $row["email"]; ?></a></td>
                     <td><a href="../search.php?user_id=<?php echo $row["user_id"]; ?>">عرض المنتجات</a></td>
                     <td style="display: inline-block;">
                         <?php if($row["is_promoted"] == 0){ ?>

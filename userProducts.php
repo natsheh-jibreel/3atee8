@@ -1,11 +1,12 @@
-<?php include("header.php");
+<?php 
 if(isset($_SESSION["user_auth"])){
     if(!($_SESSION["user_auth"] == true)){
-        header("location: login.php");
+        header("location: ./login.php");
     }
 }else{
-    header("location: login.php");
+    header("location: ./login.php");
 }
+include("header.php");
 $user_id = $_SESSION["user_id"];
 ?>
 <!-- Breadcrumb Section Begin -->

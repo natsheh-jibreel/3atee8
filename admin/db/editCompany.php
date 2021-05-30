@@ -6,7 +6,7 @@ $name = $_POST["name"];
 $phone = $_POST["phone"];
 $price = $_POST["price"];
 
-$sql = "UPDATE DeliveryCompanies set company_name = '$name',phone = '$price', delivery_price='$price' WHERE company_id='$id'";
+$sql = "UPDATE DeliveryCompanies set company_name = '$name',phone = '$phone', delivery_price='$price' WHERE company_id='$id'";
 $result = mysqli_query($conn, $sql);
 if($result == 1){
     header("location: ../deliveryCompanies.php");

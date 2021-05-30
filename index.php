@@ -1,5 +1,5 @@
 <?php include('header.php');
-$per_page_record = 16;   
+$per_page_record = 8;
               
 if (isset($_GET["page"])) {    
     $page  = $_GET["page"];    

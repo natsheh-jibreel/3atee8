@@ -30,7 +30,7 @@
                         </div>
                         <div class="ci-text">
                             <span>رقم الهاتف:</span>
-                            <p dir="ltr">+65 11.188.888</p>
+                            <p dir="ltr"><a href="tel:+970 592956266">+970 592956266</a></p>
                         </div>
                     </div>
                     <div class="cw-item">
@@ -39,7 +39,7 @@
                         </div>
                         <div class="ci-text">
                             <span>البريد الالكتروني:</span>
-                            <p>3atee8@gmail.com</p>
+                            <p><a href="mailto: info@3atee8.com">info@3atee8.com</a></p>
                         </div>
                     </div>
                 </div>
