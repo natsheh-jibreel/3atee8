@@ -101,15 +101,16 @@ var con_pass_label = document.getElementById("con_pass_label");
 var button = document.getElementById("submit");
 
 pass.onkeyup = function(){
-    if(pass.value.length >= 8){
-        pass_label.innerHTML = "مقبولة"
-        pass_label.style.color = "green";
-        pass_label.style.fontSize = "15px";
-    }else{
-        pass_label.innerHTML = "يجب أن لا تقل كلمة السر عن 8 أحرف";
-        pass_label.style.color = "red";
-        pass_label.style.fontSize = "15px";
-    }
+    var passRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/;
+     if(passRegex.test(pass.value)){
+         pass_label.innerHTML = "مقبول"
+         pass_label.style.color = "green";
+         pass_label.style.fontSize = "15px";
+     }else{
+         pass_label.innerHTML = "كلمة المرور يجب ان تكون على الاقل ٨ احرف وتحتوي رقم وحرف واحد على الاقل";
+         pass_label.style.color = "red";
+         pass_label.style.fontSize = "15px";
+     }
     if(pass.value === con_pass.value){
         con_pass_label.innerHTML = "كلمات السر متطابقة"
         con_pass_label.style.color = "green";

@@ -56,7 +56,11 @@
                         <a href="db/promoteProduct.php?id=<?php echo $row["product_id"]; ?>" style="display:inline-block;margin-top: 8px;">
                             <i style="color: green;font-size:x-large;padding:0 2px;margin: 0 2px;background-color:white;border:none;" class="fa fa-star"></i>
                         </a>
-                        <?php } ?>
+                        <?php }else{ ?>
+                            <a href="db/unpromoteProduct.php?id=<?php echo $row["product_id"]; ?>" style="display:inline-block;margin-top: 8px;">
+                            <i style="color: red;font-size:x-large;padding:0 2px;margin: 0 2px;background-color:white;border:none;" class="fa fa-star"></i>
+                        </a>
+                        <?php }?>
                         <a onclick="return confirm('هل انت متاكد انك تريد حذف هذا المنتج؟');" href="db/deleteProduct.php?id=<?php echo $row["product_id"]; ?>" style="display:inline-block;">
                             <i style="color: red;font-size:x-large;padding:0 2px;margin: 0 2px;background-color:transparent;" class="fa fa-trash"></i>
                         </a>

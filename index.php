@@ -20,14 +20,13 @@ $result = mysqli_query($conn, $sql);
 <!-- Hero Section Begin -->
 <section class="hero-section">
     <div class="hero-items owl-carousel">
-        <div class="single-hero-items set-bg" data-setbg="Assets/ProductsImages/jjj04260236.png">
-            
+        <div class="single-hero-items set-bg" data-setbg="Assets/img/promoteBG.png">
+            <a href="contact.php" style="width: 100%;height:100%;"></a>
         </div>
-        <div class="single-hero-items set-bg" data-setbg="Assets/ProductsImages/huffy04281130.jpeg">
-            
+        <div class="single-hero-items set-bg" data-setbg="Assets/img/BG2.png">
         </div>
-        <div class="single-hero-items set-bg" data-setbg="Assets/ProductsImages/huffy04281130.jpeg">
-            
+        <div class="single-hero-items set-bg" data-setbg="Assets/img/promoteBG.png">
+            <a href="contact.php" style="width: 100%;height:100%;"></a>
         </div>
     </div>
 </section>

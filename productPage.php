@@ -23,19 +23,20 @@ $categorySql = "SELECT category_name FROM Category WHERE category_id = '$categor
 $categoryResult = mysqli_query($conn, $categorySql);
 $categoryRow = mysqli_fetch_assoc($categoryResult);
 
-if (isset($_POST['save'])) {
-    $ratedIndex = $conn->real_escape_string($_POST['ratedIndex']);
-    $sql2 = "SELECT user_id FROM user_rating WHERE user_id = '$rater_id'";
+if (isset($_GET['rate'])) {
+    $ratedIndex = $_GET['rate'];
+    $sql2 = "SELECT user_id FROM user_rating WHERE user_id = '$user_id' AND rater_id = '$rater_id'";
     $result = mysqli_query($conn, $sql2);
     if(mysqli_num_rows($result) > 0){
-        $conn->query("UPDATE user_rating SET rating = '$ratedIndex' WHERE rater_id = '$rater_id'");
+        $conn->query("UPDATE user_rating SET rating = '$ratedIndex' WHERE user_id = '$user_id' AND rater_id = '$rater_id'");
     }else
-        $conn->query("INSERT INTO user_rating VALUES ('$user_id', '$rater_id', '$ratedIndex'");
+        $conn->query("INSERT INTO user_rating VALUES ('$user_id', '$rater_id', '$ratedIndex')");
 }
 $avg_rate_sql = "SELECT AVG(rating) as rate FROM user_rating WHERE user_id = '$user_id'";
 $avg_rate_result = mysqli_query($conn, $avg_rate_sql);
 $avg_rate_row = mysqli_fetch_assoc($avg_rate_result);
 $avg_rate = $avg_rate_row["rate"];
+$avg_rate = $avg_rate - 1;
 if($avg_rate == NULL){
     $avg_rate = 0;
 }
@@ -76,7 +77,13 @@ if($avg_rate == NULL){
                             <span class="glyphicon glyphicon-star" data-index="2" aria-hidden="true"></span>
                             <span class="glyphicon glyphicon-star" data-index="3" aria-hidden="true"></span>
                             <span class="glyphicon glyphicon-star" data-index="4" aria-hidden="true"></span>
-                            <span class="label label-success">61</span>
+                            <?php
+                            $sql = "SELECT COUNT(rating) as c FROM user_rating WHERE user_id = '$user_id'";
+                            $r = mysqli_query($conn, $sql);
+                            $rr = mysqli_fetch_assoc($r);
+                            $c = $rr['c'];
+                            ?>
+                            <span class="label label-success"><?php echo $c; ?></span>
                         </div>
                     </div>
                     <div class="row">
@@ -182,7 +189,9 @@ if($avg_rate == NULL){
                 </div>
                 <div class="row">
                     <div class="col-md-12 top-10">
-                        <p>للاستفسار عن طريق الهاتف, <a href="tel:<?php echo $userRow["mobile_numebr"]; ?>" style="color: black;">اتصل :  <?php echo $userRow["mobile_numebr"]; ?></a></p>
+                        <p>للاستفسار عن طريق الهاتف, <a href="tel:<?php echo $userRow["mobile_numebr"]; ?>" style="color: blue;">اتصل :  <?php echo $userRow["mobile_numebr"]; ?></a></p>
+                        <p dir="rtl">او الواتساب:</p>
+                        <img src="https://chart.apis.google.com/chart?cht=qr&chl=https://wa.me/<?php echo $userRow["mobile_numebr"]; ?>&chs=200x200" alt="">
                     </div>
                 </div>
                 
@@ -326,7 +335,8 @@ if($avg_rate == NULL){
 
         $('.glyphicon-star').on('click', function () {
             ratedIndex = parseInt($(this).data('index'));
-            saveToTheDB(ratedIndex);
+            rate = ratedIndex + 1;
+            window.location.href="productPage.php?product_id=<?php echo $product_id; ?>&rate="+rate;
         });
 
 
@@ -349,17 +359,5 @@ if($avg_rate == NULL){
         for (var i=0; i <= <?php echo $avg_rate; ?>; i++)
             $('.glyphicon-star:eq('+i+')').css('color', 'green');
 
-    }
-
-    function saveToTheDB(rate) {
-        $.ajax({
-            url: "productPage.php?product_id=<?php echo $product_id; ?>",
-            method: "POST",
-            dataType: 'json',
-            data: {
-                save: 1,
-                ratedIndex: rate
-            }
-        });
     }
 </script>

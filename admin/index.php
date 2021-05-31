@@ -95,6 +95,7 @@ include 'header.php';
                                         <th>المشتري</th>
                                         <th>شركة التوصيل</th>
                                         <th>الكمية</th>
+                                        <th>التوصيل</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -103,6 +104,7 @@ include 'header.php';
                                         <th>المشتري</th>
                                         <th>شركة التوصيل</th>
                                         <th>الكمية</th>
+                                        <th>التوصيل</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -134,6 +136,13 @@ include 'header.php';
                                         <td> <?php echo $buyer["name"] ?> </td>
                                         <td> <?php echo $dc["company_name"] ?> </td>
                                         <td> <?php echo $order["amount"] ?> </td>
+                                        <td>
+                                            <?php
+                                            if($order["is_delivered"]){
+                                                echo '<i class="fas fa-check" style="color:green;"></i>';
+                                            }
+                                            ?>
+                                        </td>
                                     </tr>
                                     <?php } ?>
                                 </tbody>

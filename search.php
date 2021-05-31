@@ -5,7 +5,11 @@ if(isset($_GET["category_id"])){
     echo '<section class="latest-blog spad">
             <div class="container">
                 <div class="row" dir="rtl">';
-                $sql = "SELECT * FROM Products WHERE category_id = '$id' ORDER BY is_promoted, product_id DESC LIMIT 100";
+                $sql = "SELECT * FROM Products 
+                        LEFT JOIN Category 
+                        ON Category.category_id = Products.category_id 
+                        WHERE Products.category_id = '$id' OR Category.parent_id = '$id' 
+                        ORDER BY Products.is_promoted, Products.product_id DESC LIMIT 100";
                 $result = mysqli_query($conn, $sql);
                 while($row = mysqli_fetch_assoc($result)){
                     $category_id = $row["category_id"];

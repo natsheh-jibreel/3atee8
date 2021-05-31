@@ -5,7 +5,7 @@
             <div class="col-lg-6">
                 <div class="footer-left">
                     <div class="footer-logo">
-                        <a href="#"><img src="img/footer-logo.png" alt=""></a>
+                        <a href="#"><img src="Assets/img/logo.png" alt=""></a>
                     </div>
                     <div class="footer-widget">
                         <h5> تواصل معنا</h5>

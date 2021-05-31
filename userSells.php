@@ -35,6 +35,8 @@ if(isset($_SESSION["user_auth"])){
                     <td>اسم المشتري </td>
                     <td>هاتف المشتري </td>
                     <td>مدة الاستئجار  </td>
+                    <td>شركة التوصيل  </td>
+                    <td>رقم شركة التوصيل  </td>
                 </tr>
                 <?php 
                 $counter = 1;
@@ -56,6 +58,11 @@ if(isset($_SESSION["user_auth"])){
                     $buyerSql = "SELECT CONCAT(first_name , ' ' , last_name) AS name, mobile_numebr FROM Users WHERE user_id = '$buyer_id'";
                     $buyerResult = mysqli_query($conn, $buyerSql);
                     $buyerRow = mysqli_fetch_assoc($buyerResult);
+
+                    $dc_id = $row["delivery_company_id"];
+                    $dcSql = "SELECT * FROM DeliveryCompanies WHERE company_id = '$dc_id'";
+                    $dcResult = mysqli_query($conn, $dcSql);
+                    $dcRow = mysqli_fetch_assoc($dcResult);
                 ?>
                 <tr class="d-row">
                     <td><?php echo $counter; ?></td>
@@ -82,6 +89,12 @@ if(isset($_SESSION["user_auth"])){
                     </td>
                     <td>
                         <?php echo $row["duration"]; ?>
+                    </td>
+                    <td>
+                        <?php echo $dcRow["company_name"]; ?>
+                    </td>
+                    <td>
+                        <a href="tel:<?php echo $dcRow["phone"]; ?>"><?php echo $dcRow["phone"]; ?></a>
                     </td>
                     
                 </tr>

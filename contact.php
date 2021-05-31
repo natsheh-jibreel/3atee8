@@ -1,4 +1,11 @@
 <?php include('header.php');?>
+<?php
+if(isset($_POST["submit"])){
+    if($_POST["submit"]) {
+        mail("info@3atee8.com", "Email From: ". $_POST["name"] , $_POST["message"]. "\nFrom: ". $_POST["email"]);
+    }
+}
+?>
 
 <!-- Breadcrumb Section Begin -->
 <div class="breacrumb-section">
@@ -49,16 +56,16 @@
                     <div class="leave-comment">
                         <h4>أرسل رسالة</h4>
                         <p>سوف نقوم بالتواصل معك والاجابة على جميع استفساراتك</p>
-                        <form action="#" class="comment-form">
+                        <form action="contact.php" class="comment-form">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="الاسم" dir="rtl">
+                                    <input name="name" type="text" placeholder="الاسم" dir="rtl">
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="البريد الالكتروني" dir="rtl">
+                                    <input name="email" type="text" placeholder="البريد الالكتروني" dir="rtl">
                                 </div>
                                 <div class="col-lg-12">
-                                    <textarea placeholder="الرسالة" dir="rtl"></textarea>
+                                    <textarea name="message" placeholder="الرسالة" dir="rtl"></textarea>
                                     <button type="submit" class="site-btn">إرسال</button>
                                 </div>
                             </div>

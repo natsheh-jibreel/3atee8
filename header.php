@@ -34,7 +34,7 @@ require("db/db_connect.php");
     <!-- Header Section Begin -->
     <header class="header-section" dir="rtl">
     <nav class="navbar navbar-expand-md navbar-hover">
-        <a class="navbar-brand" href="#"><img src="" alt=""></a>
+        <a class="navbar-brand" href="index.php"><img src="./Assets/img/logo.png" alt="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHover" aria-controls="navbarDD" aria-expanded="false" aria-label="Navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

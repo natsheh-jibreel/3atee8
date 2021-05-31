@@ -1,4 +1,4 @@
-<?php 
+<?php include 'header.php'; 
 if(isset($_SESSION["user_auth"])){
     if(!($_SESSION["user_auth"] == true)){
         header("location: login.php");
@@ -6,7 +6,6 @@ if(isset($_SESSION["user_auth"])){
 }else{
     header("location: login.php");
 }
-include 'header.php'; 
 ?>
 <!-- Breadcrumb Section Begin -->
 <div class="breacrumb-section">
@@ -33,11 +32,13 @@ include 'header.php';
                     <td>السعر </td>
                     <td>الكمية </td>
                     <td>المجموع </td>
+                    <td>شركة التوصيل  </td>
+                    <td>رقم شركة التوصيل  </td>
                 </tr>
                 <?php 
                 $counter = 1;
                 $user_id = $_SESSION["user_id"];
-                $sql = "SELECT product_id, amount FROM Orders WHERE buyer_id = '$user_id' ORDER BY product_id DESC";
+                $sql = "SELECT order_id, product_id, amount, delivery_company_id FROM Orders WHERE buyer_id = '$user_id' ORDER BY product_id DESC";
                 $result = mysqli_query($conn, $sql);
                 while($row = mysqli_fetch_assoc($result)){
                     $product_id = $row["product_id"];
@@ -47,6 +48,11 @@ include 'header.php';
                     $product_name = $productRow["product_name"];
                     $product_price = $productRow["product_price"];
                     $amount = $row["amount"];
+
+                    $dc_id = $row["delivery_company_id"];
+                    $dcSql = "SELECT * FROM DeliveryCompanies WHERE company_id = '$dc_id'";
+                    $dcResult = mysqli_query($conn, $dcSql);
+                    $dcRow = mysqli_fetch_assoc($dcResult);
                 ?>
                 <tr class="d-row">
                     <td><?php echo $counter; ?></td>
@@ -62,6 +68,16 @@ include 'header.php';
                     </td>
                     <td>
                         <output id="total<?php echo $counter;?>"></output>
+                    </td>
+
+                    <td>
+                        <?php echo $dcRow["company_name"]; ?>
+                    </td>
+                    <td>
+                        <a href="tel:<?php echo $dcRow["phone"]; ?>"><?php echo $dcRow["phone"]; ?></a>
+                    </td>
+                    <td>
+                        <a href="db/cancelOrder.php?id=<?php echo $row["order_id"]; ?>" onclick="return confirm('هل انت متاكد انك تريد الغاء الطلب؟')"><i class="fa fa-times" style="color: red;"></i></a>
                     </td>
                 </tr>
                 <?php

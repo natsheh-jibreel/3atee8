@@ -43,6 +43,10 @@
                         <a href="db/promoteUser.php?id=<?php echo $row["user_id"]; ?>" style="display:inline-block;margin-top: 8px;">
                             <i style="color: green;font-size:x-large;padding:0 2px;margin: 0 2px;background-color:white;border:none;" class="fa fa-star"></i>
                         </a>
+                        <?php }else{ ?>
+                        <a href="db/unpromoteUser.php?id=<?php echo $row["user_id"]; ?>" style="display:inline-block;margin-top: 8px;">
+                            <i style="color: red;font-size:x-large;padding:0 2px;margin: 0 2px;background-color:white;border:none;" class="fa fa-star"></i>
+                        </a>
                         <?php } ?>
                         <a onclick="return confirm('هل انت متاكد انك تريد حذف هذا المستخدم؟');" href="db/deleteUser.php?id=<?php echo $row["user_id"]; ?>" style="display:inline-block;">
                             <i style="color: red;font-size:x-large;padding:0 2px;margin: 0 2px;background-color:transparent;" class="fa fa-trash"></i>
