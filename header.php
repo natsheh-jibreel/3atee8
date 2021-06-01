@@ -105,7 +105,7 @@ require("db/db_connect.php");
         </div>
         <div class="search-container">
             <input onchange="search()" id="search_text" type="text" placeholder="ابحث..." name="search">
-            <button><a href="#" id="search_btn"><i class="fa fa-search"></i></a></button>
+            <button><a href="#" id="search_btn"><i class="fa fa-search" style="color: black;"></i></a></button>
         </div>
         <div id="mobile-menu-wrap"></div>
     </nav>

@@ -6,7 +6,7 @@ $password = $_POST["password"];
 
 
 
-$sql = "SELECT company_id, email, password FROM deliveryCompanies WHERE email = '$email' AND password = '$password'";
+$sql = "SELECT company_id, email, password FROM DeliveryCompanies WHERE email = '$email' AND password = '$password'";
 $result = mysqli_query($conn, $sql);
 
 if(mysqli_num_rows($result)>0){

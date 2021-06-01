@@ -63,8 +63,8 @@
                             <input type="text" id="address" name="address" value="<?php echo $_SESSION["address"]; ?>" required>
                         </div>
                         <div class="group-input">
-                            <label for="phone">رقم الهاتف  *</label>
-                            <input type="number" id="phone" name="phone" value="<?php echo $_SESSION["phone"]; ?>" required>
+                            <label for="phone">رقم الهاتف (مع مقدمة الواتس)  *</label>
+                            <input type="text" id="phone" name="phone" value="<?php echo $_SESSION["phone"]; ?>" required>
                         </div>
                         <div class="group-input">
                             <label for="email">البريد الإلكتروني   *</label>

@@ -191,7 +191,7 @@ if($avg_rate == NULL){
                     <div class="col-md-12 top-10">
                         <p>للاستفسار عن طريق الهاتف, <a href="tel:<?php echo $userRow["mobile_numebr"]; ?>" style="color: blue;">اتصل :  <?php echo $userRow["mobile_numebr"]; ?></a></p>
                         <p dir="rtl">او الواتساب:</p>
-                        <img src="https://chart.apis.google.com/chart?cht=qr&chl=https://wa.me/<?php echo $userRow["mobile_numebr"]; ?>&chs=200x200" alt="">
+                        <img src="https://chart.apis.google.com/chart?cht=qr&chl=wa.me/<?php echo $userRow["mobile_numebr"]; ?>&chs=200x200" alt="">
                     </div>
                 </div>
                 
@@ -331,7 +331,6 @@ if($avg_rate == NULL){
 
     $(document).ready(function(){
         resetStarColors();
-
 
         $('.glyphicon-star').on('click', function () {
             ratedIndex = parseInt($(this).data('index'));

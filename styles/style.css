@@ -169,8 +169,8 @@
 -----------------------*/
     
     .hero-items .single-hero-items {
-        height: 725px;
-        padding-top: 210px;
+        height: 600px;
+        padding-top: 1search-container0px;
     }
     
     .hero-items .single-hero-items span {
@@ -4177,12 +4177,15 @@ Header
     
     .search-container button {
         padding: 6px 10px;
-        margin-top: 8px;
-        margin-right: 16px;
-        background: #ddd;
         font-size: 17px;
         border: none;
         cursor: pointer;
+        background-color: #e7ab3c;
+        right: 0;
+        top: 0;
+        margin: 0;
+        height: 40px;
+        border-radius: 5px;
     }
     
     .search-container button:hover {

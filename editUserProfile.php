@@ -59,7 +59,7 @@ $email = $row["email"];
                         </div>
                         <div class="group-input">
                             <label for="phone">رقم الهاتف  *</label>
-                            <input type="number" id="phone" name="phone" value="<?php echo $phone; ?>" required>
+                            <input type="text" id="phone" name="phone" value="<?php echo $phone; ?>" required>
                         </div>
                         <div class="group-input">
                             <label for="email">البريد الإلكتروني   *</label>

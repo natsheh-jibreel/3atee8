@@ -27,6 +27,8 @@
                         <li><a href="register.php">تسجيل</a></li>
                         <li><a href="contact.php">تواصل معنا</a></li>
                         <li><a href="search.php?selling_status=بيع">تسوق</a></li>
+                        <li><a href="privacyConditions.php">سياسة الخصوصية</a></li>
+                        <li><a href="termsOfUse.php">شروط وأحكام الإستخدام</a></li>
                     </ul>
                 </div>
             </div>
