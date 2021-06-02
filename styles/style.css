@@ -3467,6 +3467,7 @@ Header
         padding-left: 20px;
         padding-right: 15px;
         direction: rtl;
+        font-size: medium;
     }
     
     .add-form form .group-input textarea {

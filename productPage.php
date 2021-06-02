@@ -177,9 +177,15 @@ if($avg_rate == NULL){
                 </form>
                 <div class="row">
                     <div class="col-md-6" style="float: left;">
-                        <button id="orderbtn" class="btn btn-lg btn-brand" onclick="openForm(), ramount.value = amount.value, rdc_price = parseInt(dc_id.options[dc_id.selectedIndex].text), updateTotal()">
-                        طلب
-                        </button>
+                    <?php if($user_id == $_SESSION["user_id"])
+                    echo '<button id="orderbtn" class="btn btn-lg btn-brand" onclick="openForm(), ramount.value = amount.value, rdc_price = parseInt(dc_id.options[dc_id.selectedIndex].text), updateTotal()" disabled>
+                    طلب
+                    </button>';
+                    else
+                    echo '<button id="orderbtn" class="btn btn-lg btn-brand" onclick="openForm(), ramount.value = amount.value, rdc_price = parseInt(dc_id.options[dc_id.selectedIndex].text), updateTotal()">
+                    طلب
+                    </button>';
+                    ?>
                     </div>
                 </div>                    
                 <div class="row">
@@ -191,7 +197,8 @@ if($avg_rate == NULL){
                     <div class="col-md-12 top-10">
                         <p>للاستفسار عن طريق الهاتف, <a href="tel:<?php echo $userRow["mobile_numebr"]; ?>" style="color: blue;">اتصل :  <?php echo $userRow["mobile_numebr"]; ?></a></p>
                         <p dir="rtl">او الواتساب:</p>
-                        <img src="https://chart.apis.google.com/chart?cht=qr&chl=wa.me/<?php echo $userRow["mobile_numebr"]; ?>&chs=200x200" alt="">
+                        <?php $int = (int) filter_var($userRow["mobile_numebr"], FILTER_SANITIZE_NUMBER_INT);  ?>
+                        <img src="https://chart.apis.google.com/chart?cht=qr&chl=wa.me/<?php echo $int; ?>&chs=200x200" alt="">
                     </div>
                 </div>
                 
